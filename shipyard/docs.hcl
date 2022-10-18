@@ -4,7 +4,7 @@ docs "docs" {
 
   path = "./docs"
 
-  index_title = "Envoy Metrics"
+  index_title = "Envoy"
 
   image {
     # see https://hub.docker.com/r/shipyardrun/docs/tags
