@@ -25,12 +25,12 @@ variable "consul_release_controller_enabled" {
 
 variable "consul_acls_enabled" {
   description = "Enable ACLs for securing the Consul server"
-  default     = false
+  default     = true
 }
 
 variable "consul_tls_enabled" {
   description = "Enable TLS to secure the Consul server"
-  default     = false
+  default     = true
 }
 
 variable "consul_ingress_gateway_enabled" {
@@ -82,19 +82,22 @@ module "consul" {
   source = "github.com/shipyard-run/blueprints?ref=00bb8047e7d0443f182e66c76706192be0ca1cb5/modules//kubernetes-consul"
 }
 
-#k8s_config "app" {
-#  depends_on = ["module.consul"]
-#
-#  cluster = "k8s_cluster.dc1"
-#  paths = [
-#    "./app/consul-config.yaml",
-#    "./app/api.yaml",
-#    "./app/payments.yaml",
-#    "./app/currency.yaml",
-#  ]
-#
-#  wait_until_ready = true
-#}
+k8s_config "app" {
+  depends_on = ["module.consul"]
+
+  cluster = "k8s_cluster.dc1"
+  paths = [
+    "./app/consul-config.yaml",
+    "./app/api.yaml",
+    "./app/payments.yaml",
+    "./app/currency.yaml",
+    "./app/loadtest.yaml",
+    "./app/metrics.yaml",
+    "./app/application-dashboard.yaml",
+  ]
+
+  wait_until_ready = true
+}
 #
 #ingress "public" {
 #  source {
