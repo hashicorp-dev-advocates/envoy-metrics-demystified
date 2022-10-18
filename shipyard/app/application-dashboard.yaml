@@ -41,6 +41,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
+      "id": 1,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -163,13 +164,13 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "exemplar": true,
-              "expr": "count(count(prober_probe_total{pod=~\"payments-primary-.*\", container=\"payments\", result=\"successful\", probe_type=\"Liveness\"}) by (pod))",
+              "expr": "count(count(prober_probe_total{container=\"payments\", result=\"successful\", probe_type=\"Liveness\"}) by (pod))",
               "interval": "",
               "legendFormat": "",
               "refId": "A"
             }
           ],
-          "title": "Payments Primary Pods Running",
+          "title": "Payments Pods Running",
           "type": "stat"
         },
         {
@@ -227,13 +228,13 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "exemplar": true,
-              "expr": "count(count(prober_probe_total{pod!~\"payments-primary-.*\", container=\"payments\", result=\"successful\", probe_type=\"Liveness\"}) by (pod))",
+              "expr": "count(count(prober_probe_total{container=\"currency\", result=\"successful\", probe_type=\"Liveness\"}) by (pod))",
               "interval": "",
               "legendFormat": "",
               "refId": "A"
             }
           ],
-          "title": "Payments Canary Pods Running",
+          "title": "Currency Pods Running",
           "type": "stat"
         },
         {
@@ -370,7 +371,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "exemplar": true,
-              "expr": "count(count(prober_probe_total{pod=~\"api-deployment-.*\", container=\"api\", result=\"successful\", probe_type=\"Liveness\"}) by (pod))",
+              "expr": "count(count(prober_probe_total{container=\"api\", result=\"successful\", probe_type=\"Liveness\"}) by (pod))",
               "interval": "",
               "legendFormat": "API Pods",
               "refId": "A"
@@ -381,9 +382,9 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "exemplar": true,
-              "expr": "count(prober_probe_total{pod!~\"payments-primary-.*\", container=\"payments\", result=\"successful\", probe_type=\"Liveness\"})",
+              "expr": "count(prober_probe_total{container=\"payments\", result=\"successful\", probe_type=\"Liveness\"})",
               "interval": "",
-              "legendFormat": "Payments Canary Pods",
+              "legendFormat": "Payments Pods",
               "refId": "B"
             },
             {
@@ -392,10 +393,10 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "exemplar": true,
-              "expr": "count(prober_probe_total{pod=~\"payments-primary-.*\", container=\"payments\", result=\"successful\", probe_type=\"Liveness\"})",
+              "expr": "count(prober_probe_total{container=\"currency\", result=\"successful\", probe_type=\"Liveness\"})",
               "hide": false,
               "interval": "",
-              "legendFormat": "Payments Primary Pods",
+              "legendFormat": "Currency Pods",
               "refId": "C"
             }
           ],
@@ -427,7 +428,7 @@ data:
           },
           "gridPos": {
             "h": 10,
-            "w": 8,
+            "w": 6,
             "x": 0,
             "y": 19
           },
@@ -459,7 +460,7 @@ data:
               "refId": "A"
             }
           ],
-          "title": "Downstream error count",
+          "title": "API Downstream error count",
           "type": "gauge"
         },
         {
@@ -485,8 +486,8 @@ data:
           },
           "gridPos": {
             "h": 10,
-            "w": 8,
-            "x": 8,
+            "w": 6,
+            "x": 6,
             "y": 19
           },
           "id": 6,
@@ -517,7 +518,7 @@ data:
               "refId": "A"
             }
           ],
-          "title": "Retries per Second",
+          "title": "Payments Retries per Second",
           "type": "gauge"
         },
         {
@@ -543,8 +544,66 @@ data:
           },
           "gridPos": {
             "h": 10,
-            "w": 8,
-            "x": 16,
+            "w": 6,
+            "x": 12,
+            "y": 19
+          },
+          "id": 21,
+          "options": {
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true,
+            "text": {}
+          },
+          "pluginVersion": "8.4.6",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": true,
+              "expr": "sum(round(increase(envoy_cluster_upstream_rq_retry{consul_destination_service=\"currency\"}[$__rate_interval]),1))",
+              "interval": "",
+              "legendFormat": "",
+              "refId": "A"
+            }
+          ],
+          "title": "Currency Retries per Second",
+          "type": "gauge"
+        },
+        {
+          "fieldConfig": {
+            "defaults": {
+              "mappings": [],
+              "noValue": "0",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 6,
+            "x": 18,
             "y": 19
           },
           "id": 18,
@@ -661,7 +720,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "exemplar": true,
-              "expr": "sum(rate(envoy_http_downstream_rq_xx{consul_source_service=\"ingress-gateway\", envoy_response_code_class=~\"2|5\",envoy_http_conn_manager_prefix=\"ingress_upstream_18080\"}[$__rate_interval])) by (envoy_response_code_class)",
+              "expr": "sum(rate(envoy_http_downstream_rq_xx{consul_source_service=\"api\", envoy_response_code_class=~\"2|5\"}[$__rate_interval])) by (envoy_response_code_class)",
               "hide": false,
               "interval": "",
               "legendFormat": "Downstream Response Code {{envoy_response_code_class}}xx",
@@ -1186,7 +1245,7 @@ data:
           "type": "logs"
         }
       ],
-      "refresh": "10s",
+      "refresh": "",
       "schemaVersion": 35,
       "style": "dark",
       "tags": [],
