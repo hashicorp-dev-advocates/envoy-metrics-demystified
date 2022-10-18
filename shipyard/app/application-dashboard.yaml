@@ -638,7 +638,7 @@ data:
           "type": "gauge"
         },
         {
-          "description": "",
+          "description": "Note: Mention that envoy has multiple clusters all of which independently report stats. We should build a flow diagram that shows the flow of data through envoy and all the metrics that it touches.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -720,7 +720,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "exemplar": true,
-              "expr": "sum(rate(envoy_http_downstream_rq_xx{consul_source_service=\"api\", envoy_response_code_class=~\"2|5\"}[$__rate_interval])) by (envoy_response_code_class)",
+              "expr": "sum(rate(envoy_http_downstream_rq_xx{consul_source_service=\"api\", consul_upstream_service=\"payments\"}[$__rate_interval])) by (envoy_response_code_class)",
               "hide": false,
               "interval": "",
               "legendFormat": "Downstream Response Code {{envoy_response_code_class}}xx",
@@ -732,7 +732,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "exemplar": true,
-              "expr": "sum(rate(envoy_cluster_external_upstream_rq{consul_source_service=\"api\",consul_destination_service=\"payments\"}[$__rate_interval])) by (envoy_response_code)",
+              "expr": "rate(envoy_cluster_external_upstream_rq{consul_source_service=\"api\", envoy_cluster_name=\"payments\"}[$__rate_interval])",
               "hide": false,
               "interval": "",
               "legendFormat": "Payments Upstream Response Code {{envoy_response_code}}",
