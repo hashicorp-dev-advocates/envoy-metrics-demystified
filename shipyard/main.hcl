@@ -92,8 +92,10 @@ k8s_config "app" {
   paths = [
     "./app/consul-config.yaml",
     "./app/api.yaml",
-    "./app/payments.yaml",
-    "./app/currency.yaml",
+    "./app/payments_v1.yaml",
+    "./app/payments_v2.yaml",
+    "./app/currency_v1.yaml",
+    "./app/currency_v2.yaml",
     "./app/loadtest.yaml",
     "./app/metrics.yaml",
     "./app/application-dashboard.yaml",
