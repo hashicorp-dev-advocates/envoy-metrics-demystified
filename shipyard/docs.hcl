@@ -1,12 +1,13 @@
 docs "docs" {
   port = 28080
-  //open_in_browser = true
+  # open_in_browser = true
 
   path = "./docs"
 
-  index_title = "Envoy"
+  index_title = "Envoy Metrics"
 
   image {
+    # see https://hub.docker.com/r/shipyardrun/docs/tags
     name = "shipyardrun/docs:v0.5.1"
   }
 
@@ -17,6 +18,7 @@ docs "docs" {
 
 container "tools" {
   image {
+    # see https://hub.docker.com/r/shipyardrun/tools/tags
     name = "shipyardrun/tools:v0.7.0"
   }
 

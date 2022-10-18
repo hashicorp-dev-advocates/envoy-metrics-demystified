@@ -3,7 +3,7 @@ variable "consul_health_check_timeout" {
   description = "Increase the timeout for when running on CI, Consul startup can take longer due to limited resources"
 }
 
-# Mandatory varirables
+# Mandatory variables
 variable "consul_k8s_cluster" {
   default = "dc1"
 }
@@ -19,7 +19,7 @@ variable "consul_smi_controller_enabled" {
 }
 
 variable "consul_release_controller_enabled" {
-  description = "Enable the consul release controller?"
+  description = "Enable the Consul Release Controller?"
   default     = false
 }
 
@@ -34,27 +34,30 @@ variable "consul_tls_enabled" {
 }
 
 variable "consul_ingress_gateway_enabled" {
-  description = "Should ingress gateways be enabled?"
+  description = "Should Ingress Gateways be enabled?"
   default     = true
 }
 
 variable "consul_transparent_proxy_enabled" {
-  description = "Enable the transparent proxy feature for then entire cluster for consul service mesh"
+  description = "Enable the Transparent Proxy feature for the entire cluster for Consul Service Mesh"
   default     = true
 }
 
 variable "consul_auto_inject_enabled" {
-  description = "Enable the automatic injection of sidecar proxies for kubernetes pods"
+  description = "Enable the automatic injection of sidecar proxies for Kubernetes Pods"
   default     = true
 }
 
 variable "consul_auto_inject_deny_namespaces" {
-  description = "List of Kubernetes namespaces where auto inject is ignored"
-  default     = ["monitoring"]
+  description = "List of Kubernetes Namespaces where auto inject is ignored"
+
+  default = [
+    "monitoring"
+  ]
 }
 
 variable "consul_monitoring_enabled" {
-  description = "Should the monitoring stack, Prometheus, Grafana, Loki, and Tempo be installed?"
+  description = "Should the monitoring stack (Prometheus, Grafana, Loki, and Tempo) be installed?"
   default     = true
 }
 
