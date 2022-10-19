@@ -11,10 +11,10 @@ spec:
   selector:
     group: loadtest
   ports:
-  - name: metrics
-    protocol: TCP
-    port: 9102
-    targetPort: 9102
+    - name: metrics
+      protocol: TCP
+      port: 9102
+      targetPort: 9102
 
 ---
 apiVersion: v1
@@ -52,8 +52,8 @@ data:
       var payload = 'Replicants are like any other machine, are either a benefit or a hazard'
       var params = {
         headers: {
-          'Content-Type': 'text/plain',
-        },
+          'Content-Type': 'text/plain'
+        }
       }
       // our HTTP request, note that we are saving the response to res, which can be accessed later
       //const res = http.get('http://app.dev.hashicraft.com');
@@ -90,19 +90,19 @@ spec:
         consul.hashicorp.com/transparent-proxy: 'false'
     spec:
       containers:
-      - name: load-generator
-        image: loadimpact/k6
-        command: ["k6", "run", "--out", "statsd", "/etc/config/load_test.js"]
-        env:
-          - name: K6_STATSD_ADDR
-            value: localhost:9125
-        volumeMounts:
-        - name: config-volume
-          mountPath: /etc/config
-      - name: statsd-exporter
-        image: prom/statsd-exporter
-        ports:
-          - containerPort: 9102
+        - name: load-generator
+          image: loadimpact/k6
+          command: ["k6", "run", "--out", "statsd", "/etc/config/load_test.js"]
+          env:
+            - name: K6_STATSD_ADDR
+              value: localhost:9125
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/config
+        - name: statsd-exporter
+          image: prom/statsd-exporter
+          ports:
+            - containerPort: 9102
       volumes:
         - name: config-volume
           configMap:

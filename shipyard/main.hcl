@@ -82,6 +82,7 @@ network "dc1" {
 }
 
 module "consul" {
+  # see https://github.com/shipyard-run/blueprints/tree/00bb8047e7d0443f182e66c76706192be0ca1cb5/modules/kubernetes-consul
   source = "github.com/shipyard-run/blueprints?ref=00bb8047e7d0443f182e66c76706192be0ca1cb5/modules//kubernetes-consul"
 }
 
@@ -89,6 +90,7 @@ k8s_config "app" {
   depends_on = ["module.consul"]
 
   cluster = "k8s_cluster.dc1"
+
   paths = [
     "./app/consul-config.yaml",
     "./app/api.yaml",

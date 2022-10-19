@@ -5,7 +5,6 @@ title: Getting Started
 
 <TerminalVisor>
   <Terminal target="tools.container.shipyard.run" shell="/bin/bash" workdir="/" user="root" id="tools" name="Tools"/>
-  <Terminal target="tools.container.shipyard.run" shell="/bin/bash" workdir="/config" user="root" id="test" name="Test"/>
 </TerminalVisor>
 
 ## Accessing the Consul UI

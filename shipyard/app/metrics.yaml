@@ -8,12 +8,12 @@ metadata:
   namespace: monitoring
 spec:
   endpoints:
-  - interval: 15s
-    port: metrics
+    - interval: 15s
+      port: metrics
   jobLabel: example-app
   namespaceSelector:
     matchNames:
-    - default
+      - default
   selector:
     matchLabels:
       app: metrics

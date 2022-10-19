@@ -16,16 +16,17 @@ spec:
         app: currency
         metrics: enabled
       annotations:
-        #consul.hashicorp.com/connect-inject: 'true'
-        #consul.hashicorp.com/connect-service-upstreams: 'payments:9091'
-        #consul.hashicorp.com/transparent-proxy: 'true'
-        #consul.hashicorp.com/transparent-proxy-overwrite-probes: 'true'
-        #consul.hashicorp.com/transparent-proxy-exclude-inbound-ports: '9090'
+      # consul.hashicorp.com/connect-inject: 'true'
+      # consul.hashicorp.com/connect-service-upstreams: 'payments:9091'
+      # consul.hashicorp.com/transparent-proxy: 'true'
+      # consul.hashicorp.com/transparent-proxy-overwrite-probes: 'true'
+      # consul.hashicorp.com/transparent-proxy-exclude-inbound-ports: '9090'
     spec:
       serviceAccountName: currency
       automountServiceAccountToken: true
       containers:
         - name: currency
+          # see https://registry.hub.docker.com/r/nicholasjackson/fake-service/tags
           image: nicholasjackson/fake-service:v0.23.1
           imagePullPolicy: IfNotPresent
           ports:
