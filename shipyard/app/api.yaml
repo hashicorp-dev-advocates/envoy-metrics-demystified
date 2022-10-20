@@ -67,6 +67,8 @@ spec:
               value: "http://payments.default.svc"
             - name: "TIMING_50_PERCENTILE"
               value: "10ms"
+            - name: "TIMING_VARIANCE"
+              value: "20"
             - name: "TRACING_ZIPKIN"
               value: "http://tempo:9411"
             - name: "READY_CHECK_RESPONSE_DELAY"
