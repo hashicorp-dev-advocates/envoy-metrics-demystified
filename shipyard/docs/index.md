@@ -3,6 +3,8 @@ id: gettingstarted
 title: Getting Started
 ---
 
+I am editing a document
+
 <TerminalVisor>
   <Terminal target="tools.container.shipyard.run" shell="/bin/bash" workdir="/" user="root" id="tools" name="Tools"/>
 </TerminalVisor>

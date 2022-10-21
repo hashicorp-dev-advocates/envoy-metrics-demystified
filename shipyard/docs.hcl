@@ -1,5 +1,5 @@
 docs "docs" {
-  port = 28080
+  port = 3000
   # open_in_browser = true
 
   path = "./docs"
@@ -8,7 +8,7 @@ docs "docs" {
 
   image {
     # see https://hub.docker.com/r/shipyardrun/docs/tags
-    name = "shipyardrun/docs:v0.5.1"
+    name = "shipyardrun/docs:v0.6.0"
   }
 
   index_pages = [

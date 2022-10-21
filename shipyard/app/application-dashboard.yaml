@@ -5,7 +5,7 @@ metadata:
   name: application-dashboard
   namespace: monitoring
   labels:
-    grafana_dashboard: "1"
+     grafana_dashboard: "1"
 data:
   api.json: |
     {
@@ -719,6 +719,135 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "exemplar": true,
+              "expr": "envoy_listener_downstream_cx_active{service=\"api\", envoy_listener_address=~\".*_20000\"}",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "Active Downstream Connections",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": true,
+              "expr": "envoy_listener_downstream_cx_active{job=\"api\", envoy_listener_address=\"127.0.0.1_15001\"}",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "Active Upstream Connections",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": true,
+              "expr": "rate(envoy_listener_downstream_cx_total{job=\"api\", envoy_listener_address=\"127.0.0.1_15001\"}[$__rate_interval])",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "",
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": true,
+              "expr": "rate(envoy_listener_downstream_cx_destroy{job=\"api\", envoy_listener_address=\"127.0.0.1_15001\"}[$__rate_interval])",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "",
+              "refId": "D"
+            }
+          ],
+          "title": "API Connections",
+          "type": "timeseries"
+        },
+        {
+          "description": "Note: Mention that envoy has multiple clusters all of which independently report stats. We should build a flow diagram that shows the flow of data through envoy and all the metrics that it touches.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "axisSoftMin": 2,
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 13,
+            "w": 24,
+            "x": 0,
+            "y": 42
+          },
+          "id": 25,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "sum"
+              ],
+              "displayMode": "table",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "8.2.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": true,
               "expr": "sum(rate(envoy_listener_http_downstream_rq_xx{consul_source_service=\"api\", envoy_http_conn_manager_prefix=\"public_listener\"}[$__rate_interval])) by (envoy_response_code_class) != 0",
               "hide": false,
               "interval": "",
@@ -811,7 +940,7 @@ data:
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 42
+            "y": 55
           },
           "id": 22,
           "options": {
@@ -928,7 +1057,7 @@ data:
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 54
+            "y": 67
           },
           "id": 23,
           "options": {
@@ -1051,7 +1180,7 @@ data:
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 64
+            "y": 77
           },
           "id": 19,
           "options": {
@@ -1199,7 +1328,7 @@ data:
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 74
+            "y": 87
           },
           "id": 20,
           "options": {
@@ -1348,7 +1477,7 @@ data:
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 84
+            "y": 97
           },
           "id": 24,
           "options": {
@@ -1417,7 +1546,7 @@ data:
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 94
+            "y": 107
           },
           "id": 10,
           "options": {
@@ -1452,7 +1581,7 @@ data:
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 104
+            "y": 117
           },
           "id": 12,
           "options": {
