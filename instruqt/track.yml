@@ -1,6 +1,6 @@
 slug: envoy-metrics-demystified
-title: "Envoy Metrics: Demystified"
-teaser: "ServiceMeshCon North America 2022"
+title: 'Envoy Metrics: Demystified'
+teaser: ServiceMeshCon North America 2022
 description: |-
   # ServiceMeshCon North America 2022
 
@@ -11,21 +11,16 @@ description: |-
   ---
 
   This workshop uses the [Shipyard CLI](https://shipyard.run) to deploy Kubernetes, Prometheus, Grafana, Consul, and Envoy.
-
-icon: "https://raw.githubusercontent.com/hashicorp-dev-advocates/envoy-metrics-demystified/main/.github/instruqt-icon.png"
-
-tags: [
-  consul,
-  envoy",
-  grafana",
-  kubernetes",
-  prometheus,
-]
-
+icon: https://raw.githubusercontent.com/hashicorp-dev-advocates/envoy-metrics-demystified/main/.github/instruqt-icon.png
+tags:
+- consul
+- envoy"
+- grafana"
+- kubernetes"
+- prometheus
 owner: hashicorp
 developers:
-  - kerim@hashicorp.com
-  - nic@hashicorp.com
-
+- kerim@hashicorp.com
+- nic@hashicorp.com
 private: false
 published: false

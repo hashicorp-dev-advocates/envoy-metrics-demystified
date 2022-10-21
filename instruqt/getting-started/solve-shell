@@ -1,0 +1,3 @@
+#!/bin/sh
+
+shipyard run /root/envoy-metrics-demystified/shipyard
