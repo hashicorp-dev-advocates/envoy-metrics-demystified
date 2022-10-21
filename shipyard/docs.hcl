@@ -13,6 +13,7 @@ docs "docs" {
 
   index_pages = [
     "gettingstarted",
+    "connections",
   ]
 }
 
