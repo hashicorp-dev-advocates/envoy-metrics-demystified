@@ -91,7 +91,7 @@ network "dc1" {
 
 module "consul" {
   # see https://github.com/shipyard-run/blueprints/tree/00bb8047e7d0443f182e66c76706192be0ca1cb5/modules/kubernetes-consul
-  source = "github.com/shipyard-run/blueprints?ref=bac91fedf55736f79f633aae7bf43cd429773562/modules//kubernetes-consul"
+  source = "github.com/shipyard-run/blueprints?ref=e565069b64e17a430f2d4cf31f6842b12006d0d7/modules//kubernetes-consul"
 }
 
 k8s_config "app" {

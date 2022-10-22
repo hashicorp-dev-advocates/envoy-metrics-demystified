@@ -1536,76 +1536,6 @@ data:
           ],
           "title": "Latency - Currency",
           "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "loki_uid"
-          },
-          "gridPos": {
-            "h": 10,
-            "w": 24,
-            "x": 0,
-            "y": 107
-          },
-          "id": 10,
-          "options": {
-            "dedupStrategy": "none",
-            "enableLogDetails": true,
-            "prettifyLogMessage": false,
-            "showCommonLabels": false,
-            "showLabels": false,
-            "showTime": false,
-            "sortOrder": "Descending",
-            "wrapLogMessage": false
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "loki",
-                "uid": "loki_uid"
-              },
-              "expr": "{app=\"api\"}",
-              "refId": "A"
-            }
-          ],
-          "title": "API Logs",
-          "type": "logs"
-        },
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "loki_uid"
-          },
-          "gridPos": {
-            "h": 10,
-            "w": 24,
-            "x": 0,
-            "y": 117
-          },
-          "id": 12,
-          "options": {
-            "dedupStrategy": "none",
-            "enableLogDetails": true,
-            "prettifyLogMessage": false,
-            "showCommonLabels": false,
-            "showLabels": false,
-            "showTime": false,
-            "sortOrder": "Descending",
-            "wrapLogMessage": false
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "loki",
-                "uid": "loki_uid"
-              },
-              "expr": "{app=~\"payments.*\"}",
-              "refId": "A"
-            }
-          ],
-          "title": "Payments Logs",
-          "type": "logs"
         }
       ],
       "refresh": "10s",
@@ -1623,6 +1553,6 @@ data:
       "timezone": "",
       "title": "Application Dashboard",
       "uid": "sdfsdfsdf",
-      "version": 2,
+      "version": 1,
       "weekStart": ""
     }
