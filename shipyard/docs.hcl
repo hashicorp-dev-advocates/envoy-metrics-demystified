@@ -14,6 +14,10 @@ docs "docs" {
   index_pages = [
     "gettingstarted",
     "connections",
+    "http_requests",
+    "grpc_methods",
+    "retries",
+    "outlier_ejection",
   ]
 }
 
