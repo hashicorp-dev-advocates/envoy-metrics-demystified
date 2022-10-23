@@ -16,8 +16,7 @@ docs "docs" {
     "connections",
     "http_requests",
     "grpc_methods",
-    "retries",
-    "outlier_ejection",
+    "retries"
   ]
 }
 
