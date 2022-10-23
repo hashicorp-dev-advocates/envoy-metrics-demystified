@@ -274,7 +274,7 @@ histogram_quantile(0.95, rate(envoy_cluster_upstream_rq_time_bucket{consul_servi
 In this section you have seen how to report individual request data for HTTP services. In the next section you will learn how
 report this data for gRPC services.
 
-### Envoy Listener Statistics
+### Envoy Connection Manager Statistics
 A full list of statistics that are available for the Envoy HTTP Connection Manager can be found at the following location.
 Why not spend 5 minutes taking a look at some of these statistics.
 
