@@ -101,3 +101,5 @@ kubectl get pods --all-namespaces
 ```
 
 Let's begin, first you are going to learn about Connections in Envoy.
+
+<p style={{height: "400px"}}></p>

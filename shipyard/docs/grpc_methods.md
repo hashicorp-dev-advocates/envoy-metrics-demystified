@@ -164,3 +164,5 @@ histogram_quantile(0.95, sum(rate(envoy_cluster_upstream_rq_time_bucket{consul_s
 
 In this section you have learned how to report gRPC services, in the next you will learn how to report some basic reliability 
 patterns like a retries.
+
+<p style={{height: "400px"}}></p>
