@@ -14,7 +14,7 @@ In the last part you learned how to query for connections, however connections o
 to understand if your application is functioning correctly unless Envoy understands the application protocol.
 
 For Envoy to emit detailed application specific protocol metrics the Listener needs to be configured with
-a network filter.  Envoy supports many different network filters such as:
+a network filter. Envoy supports many different network filters such as:
 
 * HTTP (including gRPC)
 * Kafka
@@ -91,16 +91,16 @@ requests.
 ## Downstream Requests
 
 An important metric to consider is `envoy_listener_http_downstream_rq_xx`, this records the HTTP response that is returned to the calling client.
-Any errors that occur but are masked by a rety are not reported in this metric, it is only the response that is returned.
+Any errors that occur but are masked by a retry are not reported in this metric, it is only the response that is returned.
 
 ```javascript
 envoy_listener_http_downstream_rq_xx
 ```
 
 Let's create a new panel in the dashboard and add this metric for the API service, since this metric covers many listeners, like connections
-you need to filter it. The two fitlers that you can use are `envoy_http_conn_manager_prefix="public_listener"` to select the public listener
+you need to filter it. The two filters that you can use are `envoy_http_conn_manager_prefix="public_listener"` to select the public listener
 and then `consul_source_service="api"` to select the `api`. Depending on which service mesh you are using, different tags will be added
-to the metrics. When querying a metric in Grafana or directly in Prometheus you will see all the tags so you can choose the appropriate one.
+to the metrics. When querying a metric in Grafana or directly in Prometheus you will see all the tags, so you can choose the appropriate one.
 
 Add the following to your dashboard:
 
@@ -143,7 +143,7 @@ rate(envoy_listener_http_downstream_rq_xx{envoy_http_conn_manager_prefix="public
 You will note that there are lines for 1xx and 4xx that do not contain any data. Let's see how we can clear that up and only show things that
 have data.
 
-To do this all you need to do is to add `!=0` to the end of your query. Your final graph should looks something like the following.
+To do this all you need to do is to add `!=0` to the end of your query. Your final graph should look something like the following.
 
 ### Figure 2.2 API Downstream requests, 2xx and 5xx
 ![](./images/api_requests_3.jpg)
@@ -247,7 +247,7 @@ histogram_quantile(0.5, rate(envoy_cluster_upstream_rq_time_bucket{consul_servic
 
 ![](./images/api_requests_5.jpg)
 
-Looking at the 50% is useful to track the long term performance of your system but it does not really show you any outliers. Outliers that are
+Looking at the 50% is useful to track the long term performance of your system, but it does not really show you any outliers. Outliers that are
 present a large difference to the 50% could be dramatically influencing the median and therefore affecting performance. Therefore when looking at
 latency you should also consider the outliers such as 90% and 95%.
 

@@ -67,7 +67,7 @@ This is due to the retry masking the error in the `Payments` service from the en
 There is however a problem, there are still errors happening in the system, it is just that the existing metrics are not showing these 
 with Retry configuration applied.  To handle this we need to query another metric `envoy_cluster_retry_upstream_rq_xx`.
 
-Edit your `API Requests per Seconds` Panel and add a new query with the following detials.
+Edit your `API Requests per Seconds` Panel and add a new query with the following details.
 
 ```
 rate(envoy_cluster_retry_upstream_rq_xx{consul_source_service="api", consul_destination_service="payments"}[$__rate_interval])
@@ -81,14 +81,14 @@ After apply the changes you will now see the Retry statistics shown in your char
 ## Other Retry Statistics
 
 You have now reached the end of the workshop, we hope you have found it informative. Before you go, why not spend 5 minutes 
-investigating some of the other Retry statistics that Envoy produces.
+investigating some other Retry statistics that Envoy produces.
 
-| Name                  | Type    | Description                 |
-| --------------------- | ------- | -----------------           |
-| upstream_rq_retry | Counter | Total request retries |
-| upstream_rq_retry_limit_exceeded | Counter | Total requests not retried due to exceeding the configured number of maximum retries |
-| upstream_rq_retry_overflow | Counter | Total requests not retried due to circuit breaking or exceeding the retry budgets |
-| upstream_rq_retry_success | Counter | Total request retry successes |
-| upstream_rq_time | Histogram | Request time milliseconds |
-| upstream_rq_timeout | Counter | Total requests that timed out waiting for a response |
-| upstream_rq_total | Counter | Total requests initiated by the router to the upstream |
+| Name                             | Type      | Description                                                                          |
+|----------------------------------|-----------|--------------------------------------------------------------------------------------|
+| upstream_rq_retry                | Counter   | Total request retries                                                                |
+| upstream_rq_retry_limit_exceeded | Counter   | Total requests not retried due to exceeding the configured number of maximum retries |
+| upstream_rq_retry_overflow       | Counter   | Total requests not retried due to circuit breaking or exceeding the retry budgets    |
+| upstream_rq_retry_success        | Counter   | Total request retry successes                                                        |
+| upstream_rq_time                 | Histogram | Request time milliseconds                                                            |
+| upstream_rq_timeout              | Counter   | Total requests that timed out waiting for a response                                 |
+| upstream_rq_total                | Counter   | Total requests initiated by the router to the upstream                               |

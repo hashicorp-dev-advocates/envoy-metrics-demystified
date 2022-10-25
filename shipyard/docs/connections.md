@@ -16,7 +16,7 @@ In this section we will learn how to query envoys metrics to understand the curr
 of connections opened per second, and the number of connections closed per second. We are going to use the following metrics. 
 
 | Name                  | Type    | Description                 |
-| --------------------- | ------- | -----------------           |
+|-----------------------|---------|-----------------------------|
 | downstream_cx_active  | Gauge   | Total active connections    |
 | downstream_cx_total   | Counter | Total connections           |
 | downstream_cx_destroy | Counter | Total destroyed connections |
@@ -59,7 +59,7 @@ The listener address is set by Envoy and contains the ip and port, of the listen
 on your particular service mesh different tags will probably be used. With Consul the public listener for a service
 is by default listening on port `20000` so we can use this to filter our metrics.
 
-You should have query that looks something like the following.  
+You should have a query that looks something like the following.  
 
 ```javascript
 envoy_listener_downstream_cx_active{service="api", envoy_listener_address=~".*_20000"}
@@ -126,7 +126,7 @@ Determining this value is dependent upon how your service mesh configures Envoy 
 good time to delve into some Envoy configuration to do a little metrics archeology.
 
 Envoy's configuration can be retrieved by making a request to the admin port at the path `config_dump`. In our setup the admin port is running
-at port `19000`, if you run the following command you will see all of the Envoy configuration dumped to the terminal for the `api-deployment`.
+at port `19000`, if you run the following command you will see all the Envoy configuration dumped to the terminal for the `api-deployment`.
 
 <TerminalRunCommand target="tools">
   <Command>clear</Command>
@@ -201,8 +201,8 @@ envoy_listener_downstream_cx_active{job="api", envoy_listener_address="127.0.0.1
 You can also set the Legend `Active Upstream Connections`.
 
 What you should see is something like the following, note that the connections to the `Payments` service are not constant like the inbound
-connections to the API service. This is probably because there is not a consistent connection pool and conections are constantly being
-opened and closed. Since we know this is a HTTP restful service we are going to assume that every request is creating a TCP connection.
+connections to the API service. This is probably because there is not a consistent connection pool and connections are constantly being
+opened and closed. Since we know this is an HTTP restful service we are going to assume that every request is creating a TCP connection.
 We will see later how we can get granular metrics for requests, but, for now, lets see how we can see opened and closed connections.
 
 #### Figure 1.5 Active Upstream Connections
@@ -222,7 +222,7 @@ This metric is counter, it increments every time a new connection is opened.
 
 #### Challenge
 
-As a challenge, create a new Query in your dashboard and add the total connections for the payments listener.
+As a challenge, create a new Query in your dashboard and add the total connections for the Payments service listener.
 
 <details>
   <summary>Answer</summary>
@@ -234,7 +234,7 @@ envoy_listener_downstream_cx_total{job="api", envoy_listener_address="127.0.0.1_
 ```
 </details>
 
-We mentioned earlier that the metric `envoy_listener_downstream_cx_total` is a counter, that means it increases over time. Displaing 
+We mentioned earlier that the metric `envoy_listener_downstream_cx_total` is a counter, that means it increases over time. Displaying 
 a counter in this way is not particularly useful for our purpose. What we would like to see is the number of connections that are opened
 per second.
 
@@ -257,7 +257,7 @@ Run the following command in the terminal to see the raw metrics from Envoy that
 kubectl exec deployment/api-deployment curl localhost:19000/stats/prometheus | grep envoy_listener_downstream_cx_total
 ```
 
-The cardinality or the number or data points that Prometheus stores is based on how frequently it scrapes this data. In the current
+The cardinality or the number of data points that Prometheus stores is based on how frequently it scrapes this data. In the current
 setup we are scraping every `30 seconds` so we can not calculate a rate with a duration of anything less than this interval. 
 
 Update your query to add the `rate` function and display this on your dashboard. 
@@ -299,7 +299,7 @@ envoy_listener_downstream_cx_destroy{job="api", envoy_listener_address="127.0.0.
 Write a query that adds destroyed connections per second to your dashboard.
 
 :::note
-`envoy_listener_downstream_cx_destroy{}` is a counter, it also does not have `Per-handler Listener Stats` and therfore
+`envoy_listener_downstream_cx_destroy{}` is a counter, it also does not have `Per-handler Listener Stats` and therefore
 does not have the tag `envoy_worker_id`.
 :::
 
@@ -320,18 +320,17 @@ mirroring each other.
 
 ![](./images/api_connections_9.jpg)
 
-Whenever you see something like this for a HTTP API, it is safe to assume that a new connection is
+Whenever you see something like this for an HTTP API, it is safe to assume that a new connection is
 being consumed per request. In the next section we will validate this hypothesis by delving into Envoys HTTP request
 metrics.
 
 Before we do, don't forget to save your dashboard, we are going to create a new panel for HTTP requests.
 
 ### Envoy Listener Statistics
-A full list of Envoy listener statistics can be found at the link below, why not spend 5 minutes taking a look
-at some of the other metrics that are avaialable for an Envoy listener.
+A full list of Envoy listener statistics can be found at the link below - this is a great place to start and discover 
+some of the other metrics that are available for an Envoy listener.
 
 <a href="https://www.envoyproxy.io/docs/envoy/latest/configuration/listeners/stats#listener-manager" target="_blank">
-https://www.envoyproxy.io/docs/envoy/latest/configuration/listeners/stats#listener-manager
-</a>
+envoyproxy.io/docs/envoy/latest/configuration/listeners/stats#listener-manager</a>
 
 <p style={{height: "400px"}}></p>

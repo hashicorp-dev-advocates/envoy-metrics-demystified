@@ -38,14 +38,14 @@ gRPC metrics are reported slightly differently to the downstream metrics that yo
 on their service and name. For example `envoy_cluster_grpc_FakeService_Handle_0` is the metric that reports status code `ok` or `0`
 for the method `Hander` in the service `FakeService` for the `Currency` API.
 
-| Name                  | Type    | Description                 |
-| --------------------- | ------- | -----------------           |
-| service.method.success | Counter | Total successful service/method calls |
-| service.method.failure | Counter | Total failed service/method calls |
-| service.method.total | Counter | Total service/method calls |
-| service.method.request_message_count | Counter | Total request message count for service/method calls |
-| service.method.response_message_count | Counter | Total response message count for service/method calls |
-| service.method.upstream_rq_time | Histogram | Request time milliseconds |
+| Name                                  | Type      | Description                                           |
+|---------------------------------------|-----------|-------------------------------------------------------|
+| service.method.success                | Counter   | Total successful service/method calls                 |
+| service.method.failure                | Counter   | Total failed service/method calls                     |
+| service.method.total                  | Counter   | Total service/method calls                            |
+| service.method.request_message_count  | Counter   | Total request message count for service/method calls  |
+| service.method.response_message_count | Counter   | Total response message count for service/method calls |
+| service.method.upstream_rq_time       | Histogram | Request time milliseconds                             |
 
 Let's write a query that shows the gRPC error codes for the Currency API.
 
@@ -59,7 +59,7 @@ graphing the data as you would need to add an entry for each individual error co
 
 ![](./images/currency_grpc_1.jpg)
 
-We can however write some clever PromSQL that will alow us to query all the metrics and extract the error code into a tag.
+We can however write some clever PromSQL that will allow us to query all the metrics and extract the error code into a tag.
 
 The first thing you need to do is to graph the data using a regular expression instead of the metric name. Every metric in 
 PromSQL can be queried by it's metric name or as a generic metric using the tag `__name__`. The following example shows 
@@ -132,7 +132,7 @@ Your final query should create a graph that looks like the following example:
 ## gRPC Request Timing
 
 You have now seen how to get detailed statistics for method call status, but what about timings? There are no specific gRPC statistics
-for method call timings. Instead you have to leverge a feature of the gRPC Filter.
+for method call timings. Instead, you have to leverage a feature of the gRPC Filter.
 
 :::note
 By default, the router filter will emit translated HTTP status code stats (from the cluster namespace) for gRPC requests.
